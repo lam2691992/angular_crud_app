@@ -1,0 +1,39 @@
+mat-form-field {
+  width: 100%;
+}
+mat-label {
+  line-height: 1.9;
+}
+.row {
+  display: flex;
+  gap: 5px;
+}
+.dialog-actions {
+  padding: 0px 25px 20px;
+  button {
+    flex: 1;
+    border-radius: 5px;
+  }
+}
+.mat-mdc-radio-button ~ .mat-mdc-radio-button {
+  margin-left: 16px;
+}
+
+.custom-save-button {
+  background-color: #4caf50 !important;
+  color: white;
+}
+
+.custom-save-button:hover {
+  background-color: #45a049 !important;
+  cursor: pointer;
+}
+.custom-cancel-button {
+  background-color: lightslategray !important;
+  color: white;
+}
+
+.custom-cancel-button:hover {
+  background-color: grey !important;
+  cursor: pointer;
+}

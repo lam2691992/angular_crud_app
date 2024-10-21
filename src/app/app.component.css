@@ -21,3 +21,6 @@
     width: 100%;
   }
 }
+.action-buttons {
+  display: flex;
+}

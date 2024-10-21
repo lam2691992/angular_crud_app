@@ -9,8 +9,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
-// import { MatIconModule } from '@angular/material/icon';
-// import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,7 +19,8 @@ import { MatSortModule } from '@angular/material/sort';
  import { MatInputModule } from '@angular/material/input';
 // import {MatDatepickerModule} from '@angular/material/datepicker';
 // import { MatNativeDateModule } from '@angular/material/core';
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -31,13 +32,15 @@ import { MatSortModule } from '@angular/material/sort';
     HttpClientModule,
     MatTableModule,
     MatPaginatorModule,
-    // MatIconModule,
-    // MatButtonModule,
+    MatIconModule,
+    MatButtonModule,
     // BrowserAnimationsModule,
     // MatDialogModule,
     MatFormFieldModule,
     MatSortModule,
-     MatInputModule
+     MatInputModule,
+     MatSnackBarModule,
+     MatDialogModule,
     // MatDatepickerModule,
     // MatNativeDateModule
   ],

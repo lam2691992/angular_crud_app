@@ -1,70 +1,164 @@
 <div mat-dialog-title>
-  <h1>Employee Form</h1>
+  <h1>{{ data ? "Update Employee" : "Add Employee" }}</h1>
 </div>
-<form [formGroup]="empForm" (ngSubmit)="onFormSubmit()">
-<div mat-dialog-content class="content">
-  <div class="row">
-    <mat-form-field appearance="outline">
-      <mat-label>First name</mat-label>
-      <input matInput type="text" placeholder="Nguyen Van" formControlName="firstName" />
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Last name</mat-label>
-      <input matInput type="text" placeholder="Anh" formControlName="lastName" />
-    </mat-form-field>
-  </div>
-  <div class="row">
-    <mat-form-field appearance="outline">
-      <mat-label>Email</mat-label>
-      <input matInput type="email" placeholder="Nguyenvan@gmail.com" formControlName="email" />
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Date of birth</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="dob" />
-      <mat-hint>MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle
-        matIconSuffix
-        [for]="picker"
-      ></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
+
+<form [formGroup]="dynamicForm" (ngSubmit)="onFormSubmit()">
+  <div mat-dialog-content class="content">
+    <!-- First Name and Last Name -->
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>First Name</mat-label>
+        <input matInput formControlName="firstName" placeholder="Nguyen Van" />
+        <mat-error *ngIf="dynamicForm.get('firstName')?.hasError('required')">
+          First Name is required.
+        </mat-error>
+        <mat-error
+          *ngIf="dynamicForm.get('firstName')?.hasError('specialCharOrNumber')"
+        >
+          Invalid first name.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastName" placeholder="Anh" />
+        <mat-error *ngIf="dynamicForm.get('lastName')?.hasError('required')">
+          Last Name is required.
+        </mat-error>
+        <mat-error
+          *ngIf="dynamicForm.get('lastName')?.hasError('specialCharOrNumber')"
+        >
+          Invalid last name.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Email and Date of birth -->
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="email"
+          placeholder="Nguyenvan@gmail.com"
+          formControlName="email"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Date of birth</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="dob" />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <!-- Gender -->
+    <div class="row">
+      <mat-radio-group aria-label="Select an option" formControlName="gender">
+        <mat-label><b>Gender</b></mat-label>
+        <mat-radio-button value="Male">Male</mat-radio-button>
+        <mat-radio-button value="Female">Female</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <!-- Education and Department -->
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Education</mat-label>
+        <mat-select formControlName="education">
+          <mat-option *ngFor="let val of education" [value]="val">
+            {{ val }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Department</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="HR"
+          formControlName="department"
+        />
+      </mat-form-field>
+    </div>
+
+    <!-- Experience and Phone -->
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Experience (year)</mat-label>
+        <input
+          matInput
+          type="number"
+          placeholder="1"
+          min="0"
+          step="1"
+          formControlName="experience"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Phone</mat-label>
+        <input
+          matInput
+          formControlName="phone"
+          placeholder="+84..."
+          (input)="
+            dynamicForm.get('phone')?.updateValueAndValidity();
+            updatePhoneValidator()
+          "
+        />
+        <mat-error *ngIf="dynamicForm.get('phone')?.hasError('required')">
+          Phone number is required.
+        </mat-error>
+        <mat-error *ngIf="dynamicForm.get('phone')?.hasError('pattern')">
+          Invalid phone number.
+        </mat-error>
+        <mat-error *ngIf="dynamicForm.get('phone')?.hasError('notUnique')">
+          Phone number already exists.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- salary -->
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Salary</mat-label>
+        <input
+          matInput
+          type="number"
+          placeholder="5000"
+          min="0"
+          step="1"
+          formControlName="salary"
+        />
+        <mat-error *ngIf="dynamicForm.get('salary')?.hasError('required')">
+          Salary is required.
+        </mat-error>
+        <mat-error *ngIf="dynamicForm.get('salary')?.hasError('min')">
+          Salary must be a positive number.
+        </mat-error>
+      </mat-form-field>
+    </div>
   </div>
 
-  <div class="row">
-    <mat-radio-group aria-label="Select an option" formControlName="gender">
-      <mat-label><b>Gender</b></mat-label>
-      <mat-radio-button value="Male">Male</mat-radio-button>
-      <mat-radio-button value="Female">Female</mat-radio-button>
-    </mat-radio-group>
+  <!-- actions -->
+  <div mat-dialog-actions class="dialog-actions">
+    <button mat-raised-button class="custom-save-button" type="submit">
+      {{ data ? "Update" : "Save" }}
+    </button>
+    <button
+      mat-raised-button
+      class="custom-cancel-button"
+      type="button"
+      [mat-dialog-close]="false"
+    >
+      Cancel
+    </button>
   </div>
-
-  <div class="row">
-    <mat-form-field appearance="outline">
-      <mat-label>Education</mat-label>
-      <mat-select formControlName="education">
-        <mat-option *ngFor="let val of education" [value]="val">
-          {{ val }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Department</mat-label>
-      <input matInput type="text" placeholder="HR" formControlName="department" />
-    </mat-form-field>
-  </div>
-  <div class="row">
-    <mat-form-field appearance="outline">
-      <mat-label>Experience (year)</mat-label>
-      <input matInput type="number" placeholder="1" min="0" step="1" formControlName="experience"/>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Phone</mat-label>
-      <input matInput type="text" placeholder="+84..." formControlName="phone">
-    </mat-form-field>
-  </div>
-</div>
-<div mat-dialog-actions class="dialog-actions">
-  <button mat-raised-button class="custom-save-button" type="submit">Save</button>
-  <button mat-raised-button class="custom-cancel-button">Cancel</button>
-</div>
 </form>

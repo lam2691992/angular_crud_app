@@ -1,0 +1,52 @@
+.confirm-dialog {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.close-button {
+  margin-left: auto;
+  cursor: pointer;
+  border-radius: 10px;
+  border: none;
+  background-color: rgb(207, 208, 210) !important;
+}
+
+.close-button:hover {
+  background-color: grey !important;
+}
+
+.action-button {
+  display: flex;
+  justify-content: space-between;
+}
+.action-button button {
+  border-radius: 5px;
+  border: none;
+  padding: 10px 30px;
+}
+
+.action-button button:hover {
+  cursor: pointer;
+}
+.confirm-button,
+.cancel-button {
+  flex: 1;
+  margin: 0 5px;
+}
+.confirm-button {
+  background-color: #4caf50 !important;
+  color: white;
+}
+.confirm-button:hover {
+  background-color: #45a049 !important;
+  cursor: pointer;
+}
+.cancel-button {
+  background-color: lightslategray !important;
+  color: white;
+}
+
+.cancel-button:hover {
+  background-color: grey !important;
+  cursor: pointer;
+}

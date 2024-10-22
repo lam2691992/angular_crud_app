@@ -63,7 +63,7 @@
       "department": "th",
       "experience": 3,
       "phone": "122",
-      "salary": 3333,
+      "salary": null,
       "id": "02aa"
     },
     {
@@ -75,8 +75,8 @@
       "education": "PhD",
       "department": "kl",
       "experience": 2,
-      "phone": "5656445545454",
-      "salary": 5000,
+      "phone": "1221",
+      "salary": 2000,
       "id": "2949"
     },
     {

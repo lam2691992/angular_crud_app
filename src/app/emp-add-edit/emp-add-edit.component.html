@@ -43,6 +43,9 @@
           placeholder="Nguyenvan@gmail.com"
           formControlName="email"
         />
+        <mat-error *ngIf="dynamicForm.get('email')?.hasError('email')">
+          Invalid email format.
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">

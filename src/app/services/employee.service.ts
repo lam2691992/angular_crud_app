@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class EmployeeService {
+  [x: string]: any;
   constructor(private _http: HttpClient) {}
 
   addEmployee(data: any): Observable<any> {

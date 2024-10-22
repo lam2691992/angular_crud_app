@@ -67,7 +67,7 @@ export class EmpAddEditComponent implements OnInit {
     this.dynamicForm = this.fb.group({
       firstName: ['', [Validators.required, specialCharOrNumberValidator]],
       lastName: ['', [Validators.required, specialCharOrNumberValidator]],
-      email: [''],
+      email: ['', [Validators.email]],
       dob: [''],
       gender: ['Male'],
       education: [''],
